@@ -1,18 +1,18 @@
 ---
 generic-service:
-  nameOverride: hmpps-template-kotlin
+  nameOverride: court-list-splitter
 
   replicaCount: 4
 
   image:
-    repository: quay.io/hmpps/hmpps-template-kotlin
+    repository: quay.io/hmpps/court-list-splitter
     tag: app_version    # override at deployment time
     port: 8080
 
   ingress:
     enabled: true
     host: app-hostname.local    # override per environment
-    tlsSecretName: hmpps-template-kotlin-cert
+    tlsSecretName: court-list-splitter-cert
     path: /
 
   # Environment variables to load into the deployment
@@ -28,7 +28,7 @@ generic-service:
   #     [name of environment variable as seen by app]: [key of kubernetes secret to load]
 
   namespace_secrets:
-    hmpps-template-kotlin:
+    court-list-splitter:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
 
   allowlist:
