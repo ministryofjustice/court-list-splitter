@@ -155,7 +155,7 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - validate:
+      - build:
           filters:
             tags:
               ignore: /.*/
