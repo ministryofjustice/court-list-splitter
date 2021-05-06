@@ -11,11 +11,12 @@ executors:
     working_directory: ~/app
   builder:
     docker:
-      - image: circleci/openjdk:14-jdk-buster-browsers
+      - image: circleci/openjdk:15-jdk-buster-browsers
     working_directory: ~/app
+
   validator-integration:
     docker:
-      - image: circleci/openjdk:14-jdk-buster-browsers
+      - image: circleci/openjdk:15-jdk-buster-browsers
       - image: localstack/localstack:0.11.2
         environment:
           - SERVICES=sqs
@@ -176,7 +177,7 @@ workflows:
               only:
                 - main
           requires:
-            - validate
+            - build
             - build_docker
             - helm_lint
       - request-preprod-approval:
