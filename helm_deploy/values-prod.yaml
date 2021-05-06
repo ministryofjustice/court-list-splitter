@@ -2,8 +2,8 @@
 # Per environment values which override defaults in court-list-splitter/values.yaml
 
 generic-service:
-  minReplicaCount: 1
-  maxReplicaCount: 2
+  minReplicaCount: 2
+  maxReplicaCount: 4
 
   image:
     repository: quay.io/hmpps/court-list-splitter
@@ -14,8 +14,8 @@ generic-service:
     enabled: true
     enable_whitelist: true
     hosts:
-      - host: court-list-splitter-dev.hmpps.service.justice.gov.uk
-        cert_secret: court-probation-dev-cert-secret
+      - host: court-list-splitter.hmpps.service.justice.gov.uk
+        cert_secret: court-probation-cert-secret
     path: /
 
   env:
@@ -29,3 +29,10 @@ generic-service:
     cloudplatform-live1-2: "3.8.51.207/32"
     cloudplatform-live1-3: "35.177.252.54/32"
 
+  resources:
+    cpu:
+      limit: 1000m
+      request: 50m
+    memory:
+      limit: 1000Mi
+      request: 500Mi
