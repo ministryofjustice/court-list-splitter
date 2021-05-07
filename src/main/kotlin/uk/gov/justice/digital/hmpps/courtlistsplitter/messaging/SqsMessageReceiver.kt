@@ -12,7 +12,7 @@ import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryEventType
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryService
 
 @Service
-@Profile("!test")
+@Profile("sqs-read")
 class SqsMessageReceiver(
   @Value("\${aws.sqs.queue_name}") private val queueName: String,
   @Autowired private val telemetryService: TelemetryService

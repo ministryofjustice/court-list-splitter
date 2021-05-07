@@ -4,6 +4,9 @@ Environment variables for web and worker containers
 */}}
 {{- define "deployment.envs" }}
 env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: "{{ .Values.springProfiles }}"
+
   - name: SERVER_PORT
     value: "{{ .Values.image.port }}"
 

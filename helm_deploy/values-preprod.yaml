@@ -2,6 +2,8 @@
 minReplicaCount: 2
 maxReplicaCount: 4
 
+springProfiles: ""
+
 image:
   repository: quay.io/hmpps/court-list-splitter
   tag: latest
