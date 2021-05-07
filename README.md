@@ -1,32 +1,37 @@
-# hmpps-template-kotlin
+# Court List Splitter
 
-This is a skeleton project from which to create new kotlin projects from.
+[![CircleCI](https://circleci.com/gh/ministryofjustice/court-list-splitter.svg?style=svg)](https://circleci.com/gh/ministryofjustice/court-list-splitter)
 
-# Instructions
+This service will provide the capability to read a message from configured Amazon SQS queue. This message will is split, 
 
-If this is a Digital Prison Services project then the project will be created as part of bootstrapping - 
-see https://github.com/ministryofjustice/dps-project-bootstrap.
+## Quickstart
 
-## Renaming from HMPPS Template Kotlin - github Actions
+### Requirements
 
-Once the new repository is deployed. Navigate to the repository in github, and select the `Actions` tab.
-Click the link to `Enable Actions on this repository`.
+- Docker
+- Java
 
-Find the Action workflow named: `rename-project-create-pr` and click `Run workflow`.  This workflow will will
-execute the `rename-project.bash` and create Pull Request for you to review.  Review the PR and merge.
+Build and test:
 
-Note: ideally this workflow would run automatically however due to a recent change github Actions are not
-enabled by default on newly created repos. There is no way to enable Actions other then to click the button in the UI.
-If this situation changes we will update this project so that the workflow is triggered during the bootstrap project.
-Further reading: <https://github.community/t/workflow-isnt-enabled-in-repos-generated-from-template/136421>
+```
+./gradlew build
+```
 
-## Manually renaming from HMPPS Template Kotlin
+### Integration tests
 
-Run the `rename-project.bash` and create a PR.
+These require an SQS queue which can be initialised with localstack (https://github.com/localstack/localstack). There is a docker compose config file and a script which creates the required queues.
 
-The `rename-project.bash` script takes a single argument - the name of the project and calculates from it:
-* The main class name (project name converted to pascal case) 
-* The project description (class name with spaces between the words)
-* The main package name (project name with hyphens removed)
+```
+docker-compose up localstack
+```
 
-It then performs a search and replace and directory renames so the project is ready to be used.
+Run integration tests
+```
+./gradlew integrationTest
+```
+
+## Code Style
+
+[ktlint](https://github.com/pinterest/ktlint) is the authority on style and is enforced on build.
+
+Run `./gradlew ktlintFormat` to fix formatting errors in your code before commit.

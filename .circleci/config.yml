@@ -4,19 +4,55 @@ orbs:
   hmpps: ministryofjustice/hmpps@3.1
   jira: circleci/jira@1.2.2
 
+executors:
+  deployer:
+    docker:
+      - image: circleci/python:3
+    working_directory: ~/app
+  builder:
+    docker:
+      - image: circleci/openjdk:15-jdk-buster-browsers
+    working_directory: ~/app
+
+  validator-integration:
+    docker:
+      - image: circleci/openjdk:15-jdk-buster-browsers
+      - image: localstack/localstack:0.11.2
+        environment:
+          - SERVICES=sqs
+          - DEBUG=${DEBUG- }
+          - DATA_DIR=/tmp/localstack/data
+          - DOCKER_HOST=unix:///var/run/docker.sock
+          - AWS_EXECUTION_ENV=True
+          - DEFAULT_REGION=eu-west-2
+          - TMPDIR=/private
+    environment:
+      _JAVA_OPTIONS: -Xmx256m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2 -Dorg.gradle.daemon=false
+    working_directory: ~/app
+
 jobs:
-  validate:
-    executor:
-      name: hmpps/java
-      tag: "16.0"
+  build:
+    executor: builder
     steps:
       - checkout
       - restore_cache:
           keys:
             - gradle-{{ checksum "build.gradle.kts" }}
             - gradle-
+      - run: ./gradlew build
       - run:
-          command: ./gradlew -Dorg.gradle.jvmargs="--illegal-access=permit" -Dkotlin.daemon.jvm.options="--illegal-access=permit" check
+          name: Record the Application Version
+          command: |
+            jar xvf build/libs/court-list-splitter-*.jar BOOT-INF/classes/META-INF/build-info.properties
+            APP_VERSION=$(grep 'build.version=' BOOT-INF/classes/META-INF/build-info.properties | awk -F= '{print $2}')
+            rm BOOT-INF/classes/META-INF/build-info.properties
+            # make up a good version name
+            SHORT_HASH=$(git rev-parse --short HEAD)
+            TAG=${APP_VERSION}.${SHORT_HASH}
+            if [[ "${CIRCLE_BRANCH}" == "main" ]]; then
+              TAG=${APP_VERSION}
+            fi
+            echo $TAG > ./app_version.txt
       - save_cache:
           paths:
             - ~/.gradle
@@ -25,9 +61,12 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
-      - jira/notify:
-          token_name: JIRA_CIRCLE_TOKEN
-          job_type: build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build/libs
+            - build.gradle.kts
+            - app_version.txt
 
   deploy_dev:
     executor: deployer
@@ -60,11 +99,40 @@ jobs:
           token_name: JIRA_CIRCLE_TOKEN
           job_type: deployment
 
+  test-integration:
+    executor: validator-integration
+    steps:
+      - checkout
+      - hmpps/install_aws_cli
+      - run:
+          name: Wait for SQS to be ready
+          command: curl -4 --connect-timeout 30 --retry-connrefused --retry 20 --retry-delay 5 http://localhost:4566
+      - run:
+          name: Set up queues
+          command: bash src/test/resources/localstack/setup-sqs.sh
+      - restore_cache:
+          keys:
+            - gradle-{{ checksum "build.gradle.kts" }}
+            - gradle-
+      - run:
+          environment:
+            AWS_PROVIDER: localstack
+            SPRING_PROFILES_ACTIVE: test
+          command: ./gradlew integrationTest
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-{{ checksum "build.gradle.kts" }}
+      - store_test_results:
+          path: build/test-results
+      - store_artifacts:
+          path: build/reports/tests
+
 workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - validate:
+      - build:
           filters:
             tags:
               ignore: /.*/
@@ -85,7 +153,7 @@ workflows:
               only:
                 - main
           requires:
-            - validate
+            - build
             - build_docker
             - helm_lint
       - request-preprod-approval:
@@ -114,6 +182,10 @@ workflows:
             - court-probation-prod
           requires:
             - request-prod-approval
+
+  test-integration:
+    jobs:
+      - test-integration
 
   security:
     triggers:
