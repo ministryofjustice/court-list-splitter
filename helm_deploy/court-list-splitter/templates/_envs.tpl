@@ -16,5 +16,28 @@ env:
         name: court-list-splitter
         key: APPINSIGHTS_INSTRUMENTATIONKEY
 
+  - name: AWS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: crime-portal-gateway-queue-credentials
+        key: access_key_id
+
+  - name: AWS_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: crime-portal-gateway-queue-credentials
+        key: secret_access_key
+
+  - name: AWS_SQS_QUEUE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: crime-portal-gateway-queue-credentials
+        key: sqs_name
+
+  - name: AWS_SQS_ENDPOINT_URL
+    valueFrom:
+      secretKeyRef:
+        name: crime-portal-gateway-queue-credentials
+        key: sqs_id
 
 {{- end -}}
