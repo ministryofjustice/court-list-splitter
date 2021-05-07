@@ -10,10 +10,9 @@ import uk.gov.justice.digital.hmpps.courtlistsplitter.service.SqsService
 class SqsCheck(@Autowired private val sqsService: SqsService) : HealthIndicator {
 
   override fun health(): Health {
-    var health = Health.Builder().down().build()
     if (sqsService.isQueueAvailable()) {
-      health = Health.up().build()
+      return Health.up().build()
     }
-    return health
+    return Health.down().build()
   }
 }
