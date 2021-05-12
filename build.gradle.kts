@@ -11,11 +11,19 @@ dependencies {
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
   implementation("com.amazonaws:aws-java-sdk-sqs:1.11.899")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
+  implementation("org.springframework.boot:spring-boot-starter-validation")
+
+  // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.4")
+  implementation("org.junit.jupiter:junit-jupiter:5.7.0")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
+  testImplementation(platform("org.junit:junit-bom:5.7.1"))
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter")
+
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-  testImplementation("org.awaitility:awaitility:4.0.3")
+//  testImplementation("org.awaitility:awaitility:4.1.0")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
   testImplementation("org.mockito:mockito-core:3.9.0")
 }
