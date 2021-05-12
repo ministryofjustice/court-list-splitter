@@ -23,7 +23,6 @@ dependencies {
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-//  testImplementation("org.awaitility:awaitility:4.1.0")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
   testImplementation("org.mockito:mockito-core:3.9.0")
 }
