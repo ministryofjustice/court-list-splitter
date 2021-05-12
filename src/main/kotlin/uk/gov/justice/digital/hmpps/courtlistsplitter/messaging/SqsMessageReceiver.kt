@@ -20,12 +20,8 @@ class SqsMessageReceiver(
 ) {
 
   @SqsListener(value = ["\${aws.sqs.queue_name}"], deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
-  fun receive(message: String, @Header("MessageId") messageId: String?) {
-  @SqsListener(value = ["crime-portal-gateway-queue"], deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
   fun receive(message: String, @Header("MessageId") messageId: String) {
     log.info("Received message from SQS queue {} with messageId: {}", queueName, messageId)
-    log.error("Received message from SQS queue {} with messageId: {}", queueName, messageId)
-    System.err.println("HI " + System.currentTimeMillis())
     telemetryService.trackListEvent(messageId)
     messageProcessor.process(message, messageId)
   }

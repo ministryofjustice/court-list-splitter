@@ -10,13 +10,9 @@ import com.nhaarman.mockitokotlin2.argThat
 import com.nhaarman.mockitokotlin2.timeout
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
 import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -34,7 +30,6 @@ import uk.gov.justice.digital.hmpps.courtlistsplitter.service.MessageProcessor
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryService
 import java.nio.file.Files
 import java.nio.file.Paths
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
