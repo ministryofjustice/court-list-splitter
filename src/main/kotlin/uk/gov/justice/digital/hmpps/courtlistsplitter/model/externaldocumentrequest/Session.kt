@@ -9,6 +9,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer
+import org.slf4j.LoggerFactory
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -58,9 +59,18 @@ data class Session(
   lateinit var job: Job
 
   val courtCode: String
-    get() = (ouCode ?: job.dataJob.document.info.ouCode)
+    get() = (ouCode ?: getCourtCodeFromInfo())
+
+  private fun getCourtCodeFromInfo(): String {
+    log.info("Retrieving courtCode from parent Info instance, court {}, room {} and date {}", courtCode, courtRoom, dateOfHearing)
+    return job.dataJob.document.info.ouCode
+  }
 
   fun getSessionStartTime(): LocalDateTime {
     return LocalDateTime.of(dateOfHearing, start)
+  }
+
+  companion object {
+    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }
