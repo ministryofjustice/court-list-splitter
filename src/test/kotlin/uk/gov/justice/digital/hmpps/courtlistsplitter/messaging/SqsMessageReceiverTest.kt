@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
-import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryEventType
+import uk.gov.justice.digital.hmpps.courtlistsplitter.service.MessageProcessor
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryService
 
 @ExtendWith(MockitoExtension::class)
@@ -14,12 +14,13 @@ internal class SqsMessageReceiverTest {
 
   @Mock
   private lateinit var telemetryService: TelemetryService
-
+  @Mock
+  private lateinit var messageProcessor: MessageProcessor
   private lateinit var sqsMessageReceiver: SqsMessageReceiver
 
   @BeforeEach
   fun beforeEach() {
-    sqsMessageReceiver = SqsMessageReceiver("queue-name", telemetryService)
+    sqsMessageReceiver = SqsMessageReceiver("queue-name", telemetryService, messageProcessor)
   }
 
   @Test
@@ -27,6 +28,7 @@ internal class SqsMessageReceiverTest {
 
     sqsMessageReceiver.receive("message-content", "messageId")
 
-    verify(telemetryService).trackEvent(TelemetryEventType.COURT_LIST_RECEIVED)
+    verify(telemetryService).trackListEvent("messageId")
+    verify(messageProcessor).process("message-content", "messageId")
   }
 }
