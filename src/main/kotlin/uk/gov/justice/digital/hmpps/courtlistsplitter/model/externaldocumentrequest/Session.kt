@@ -62,7 +62,7 @@ data class Session(
     get() = (ouCode ?: getCourtCodeFromInfo())
 
   private fun getCourtCodeFromInfo(): String {
-    log.info("Retrieving courtCode from parent Info instance, court {}, room {} and date {}", courtCode, courtRoom, dateOfHearing)
+    log.info("Retrieving courtCode from parent Info instance, court {}, room {} and date {}", job.dataJob.document.info.ouCode, courtRoom, dateOfHearing)
     return job.dataJob.document.info.ouCode
   }
 
