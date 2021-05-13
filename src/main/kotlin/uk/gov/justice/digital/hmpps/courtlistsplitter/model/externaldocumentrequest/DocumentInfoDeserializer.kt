@@ -30,7 +30,7 @@ class DocumentInfoDeserializer<T>(clazz: Class<Info>) : StdDeserializer<Info>(cl
     val fileNameParts = sourceFileName.split(FIELD_DELIM.toRegex()).toTypedArray()
     if (fileNameParts.size < 4) {
       log.error("Unable to determine OU code and date of hearing from source file name of {}", sourceFileName)
-      Info(-1, "", LocalDate.of(1970, Month.JANUARY, 1))
+      return Info(-1, "", LocalDate.of(1970, Month.JANUARY, 1))
     }
     val seq = fileNameParts[0].toLong()
     val courtCode = fileNameParts[3].toUpperCase()
