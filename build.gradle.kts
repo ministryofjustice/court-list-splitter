@@ -15,7 +15,6 @@ dependencies {
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.4")
-  implementation("org.junit.jupiter:junit-jupiter:5.7.0")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 

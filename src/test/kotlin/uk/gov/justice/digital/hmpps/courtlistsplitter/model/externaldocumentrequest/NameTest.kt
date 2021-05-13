@@ -7,7 +7,7 @@ internal class NameTest {
   private val name: Name = Name(title = "Mr.", forename1 = "David", forename2 = "Robert", surname = "BOWIE")
 
   @Test
-  fun `given nulls and orenames then return names space separated`() {
+  fun `given nulls and forenames then return names space separated`() {
     assertThat(name.getForenames()).isEqualTo("David Robert")
   }
 

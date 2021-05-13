@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Primary
 import uk.gov.justice.digital.hmpps.courtlistsplitter.messaging.MessageParser
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.ExternalDocumentRequest
 import javax.validation.Validation
-import javax.validation.Validator
 
 @Configuration
 class MessagingConfig {
@@ -39,11 +38,6 @@ class MessagingConfig {
 
   @Bean
   fun messageParser(xmlMapper: XmlMapper): MessageParser<ExternalDocumentRequest> {
-    return MessageParser(xmlMapper, validator())
-  }
-
-  @Bean
-  fun validator(): Validator {
-    return Validation.buildDefaultValidatorFactory().validator
+    return MessageParser(xmlMapper, Validation.buildDefaultValidatorFactory().validator)
   }
 }

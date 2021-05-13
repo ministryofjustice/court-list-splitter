@@ -51,7 +51,6 @@ class SqsMessageReceiverIntTest {
 
   @AfterAll
   internal fun beforeAll() {
-    System.err.println("SHUT DOWN")
     amazonSQSAsync.shutdown()
   }
 
