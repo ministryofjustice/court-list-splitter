@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.1
+  hmpps: ministryofjustice/hmpps@3.2
   jira: circleci/jira@1.2.2
 
 executors:
@@ -199,10 +199,5 @@ workflows:
       - hmpps/gradle_owasp_dependency_check:
           context:
             - hmpps-common-vars
-      - hmpps/veracode_pipeline_scan:
-          context:
-            - hmpps-common-vars
-      - hmpps/veracode_pipeline_scan:
-          context:
-            - hmpps-common-vars
+
 
