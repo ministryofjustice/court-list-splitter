@@ -89,7 +89,7 @@ data class Case(
     get() = (block.session.courtCode)
 
   val sessionStartTime: LocalDateTime
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
     @JsonGetter
     get() = (block.session.getSessionStartTime())
 }
