@@ -12,11 +12,6 @@ class TelemetryService(private val telemetryClient: TelemetryClient) {
     telemetryClient.trackEvent(eventType.eventName)
   }
 
-  fun trackListEvent(messageId: String) {
-    val properties = mapOf(SQS_MESSAGE_ID_KEY to messageId)
-    telemetryClient.trackEvent(TelemetryEventType.COURT_LIST_MESSAGE_RECEIVED.eventName, properties, emptyMap())
-  }
-
   fun trackCourtListEvent(info: Info, messageId: String) {
     val properties = mapOf(COURT_CODE_KEY to info.ouCode, HEARING_DATE_KEY to info.dateOfHearing.toString(), SQS_MESSAGE_ID_KEY to messageId)
 

@@ -8,7 +8,7 @@ import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argThat
 import com.nhaarman.mockitokotlin2.timeout
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -23,11 +23,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Primary
 import org.springframework.test.context.ActiveProfiles
-import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.ExternalDocumentRequest
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.CourtCaseMatcher
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.MessageNotifier
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.MessageProcessor
-import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryService
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -39,9 +37,6 @@ class SqsMessageReceiverIntTest {
 
   @Autowired
   private lateinit var queueMessagingTemplate: QueueMessagingTemplate
-
-  @Autowired
-  private lateinit var telemetryService: TelemetryService
 
   @Autowired
   private lateinit var messageNotifier: MessageNotifier
@@ -61,7 +56,6 @@ class SqsMessageReceiverIntTest {
 
     queueMessagingTemplate.convertAndSend(QUEUE_NAME, content)
 
-    Mockito.verify(telemetryService, timeout(10000).atLeast(1)).trackListEvent(any())
     Mockito.verify(messageNotifier, timeout(5000)).send(argThat(CourtCaseMatcher("1600032953")), any())
     Mockito.verify(messageNotifier).send(argThat(CourtCaseMatcher("1600032979")), any())
     Mockito.verify(messageNotifier).send(argThat(CourtCaseMatcher("1600032952")), any())
@@ -70,9 +64,9 @@ class SqsMessageReceiverIntTest {
 
   @Test
   fun `given invalid message then track but retry before place on DLQ`() {
-    queueMessagingTemplate.convertAndSend(QUEUE_NAME, "<xml>adasd</xml>")
+    queueMessagingTemplate.convertAndSend(QUEUE_NAME, "<xml>message content</xml>")
 
-    verify(telemetryService, Mockito.timeout(10000).atLeast(2)).trackListEvent(any())
+    verifyNoMoreInteractions(messageNotifier)
   }
 
   @TestConfiguration
@@ -89,14 +83,9 @@ class SqsMessageReceiverIntTest {
     private val queueName: String
   ) {
 
-    @MockBean
-    private lateinit var telemetryService: TelemetryService
-
+    @SuppressWarnings("unused")
     @MockBean
     private lateinit var messageNotifier: MessageNotifier
-
-    @Autowired
-    private lateinit var messageParser: MessageParser<ExternalDocumentRequest>
 
     @Autowired
     private lateinit var messageProcessor: MessageProcessor
@@ -125,7 +114,7 @@ class SqsMessageReceiverIntTest {
 
     @Bean
     fun sqsMessageReceiver(): SqsMessageReceiver {
-      return SqsMessageReceiver(queueName, telemetryService, messageProcessor)
+      return SqsMessageReceiver(queueName, messageProcessor)
     }
 
     @Bean
