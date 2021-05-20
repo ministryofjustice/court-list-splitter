@@ -38,17 +38,6 @@ internal class TelemetryServiceTest {
   }
 
   @Test
-  fun `when message is received then track the list event with property`() {
-
-    telemetryService.trackListEvent("message-id")
-
-    verify(telemetryClient).trackEvent(eq("PiCCourtListMessageReceived"), propertiesCaptor.capture(), eq(emptyMap()))
-    val properties: Map<String, String> = propertiesCaptor.value
-    assertThat(properties).hasSize(1)
-    assertThat(properties).contains(MapEntry.entry("sqsMessageId", "message-id"))
-  }
-
-  @Test
   fun `when message is received and split by courts and date then track the court list event with properties`() {
 
     val info = Info(ouCode = "B10JQ", dateOfHearing = LocalDate.of(2021, Month.DECEMBER, 25), sequence = 1L)
