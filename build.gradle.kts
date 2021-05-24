@@ -9,7 +9,8 @@ configurations {
 
 dependencies {
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
-  implementation("com.amazonaws:aws-java-sdk-sqs:1.11.899")
+  implementation("com.amazonaws:aws-java-sdk-sqs:1.11.1024")
+  implementation("com.amazonaws:aws-java-sdk-sns:1.11.1024")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
