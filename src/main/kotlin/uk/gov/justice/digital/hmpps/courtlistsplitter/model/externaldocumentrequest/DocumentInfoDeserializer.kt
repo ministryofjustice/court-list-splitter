@@ -14,6 +14,7 @@ import java.time.LocalDate
 import java.time.Month
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
+import java.util.Locale
 
 @Component
 class DocumentInfoDeserializer<T>(clazz: Class<Info>) : StdDeserializer<Info>(clazz) {
@@ -33,7 +34,7 @@ class DocumentInfoDeserializer<T>(clazz: Class<Info>) : StdDeserializer<Info>(cl
       return Info(-1, "", LocalDate.of(1970, Month.JANUARY, 1))
     }
     val seq = fileNameParts[0].toLong()
-    val courtCode = fileNameParts[3].toUpperCase()
+    val courtCode = fileNameParts[3].uppercase(Locale.getDefault())
     val ouCode = courtCode.let { code ->
       if (code.length >= OU_CODE_LENGTH) {
         code.substring(0, OU_CODE_LENGTH)

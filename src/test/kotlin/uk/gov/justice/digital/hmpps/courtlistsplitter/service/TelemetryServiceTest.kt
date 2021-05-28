@@ -53,13 +53,13 @@ internal class TelemetryServiceTest {
   }
 
   @Test
-  fun `when case is received`() {
+  fun `when case is split`() {
 
     val case = buildCase(caseNo = "2134", dateOfHearing = LocalDate.of(2021, Month.DECEMBER, 25), courtCode = "B10JQ")
 
-    telemetryService.trackCourtCaseEvent(case, "message-id")
+    telemetryService.trackCourtCaseSplitEvent(case, "message-id")
 
-    verify(telemetryClient).trackEvent(eq("PiCCourtCaseReceived"), propertiesCaptor.capture(), eq(emptyMap()))
+    verify(telemetryClient).trackEvent(eq("PiCCourtCaseSplit"), propertiesCaptor.capture(), eq(emptyMap()))
     val properties: Map<String, String> = propertiesCaptor.value
 
     assertThat(properties).hasSize(5)

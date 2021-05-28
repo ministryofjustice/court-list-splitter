@@ -20,7 +20,7 @@ class MessageNotifier(
   private val topicArn: String
 ) {
   fun send(case: Case, messageId: String) {
-    telemetryService.trackCourtCaseEvent(case, messageId)
+    telemetryService.trackCourtCaseSplitEvent(case, messageId)
     val message = objectMapper.writeValueAsString(case)
     val subject = "Details for case " + case.caseNo + " in court " + case.courtCode + " published with messageId " + messageId
 

@@ -42,7 +42,7 @@ internal class MessageNotifierTest {
 
     messageNotifier.send(case, "message-id")
 
-    verify(telemetryService).trackCourtCaseEvent(case, "message-id")
+    verify(telemetryService).trackCourtCaseSplitEvent(case, "message-id")
     verify(amazonSNSClient).publish(eq("topicArn"), ArgumentMatchers.contains("caseNo"))
   }
 

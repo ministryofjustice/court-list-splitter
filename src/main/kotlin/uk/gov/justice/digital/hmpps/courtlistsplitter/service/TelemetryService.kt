@@ -18,7 +18,7 @@ class TelemetryService(private val telemetryClient: TelemetryClient) {
     telemetryClient.trackEvent(TelemetryEventType.COURT_LIST_RECEIVED.eventName, properties, emptyMap())
   }
 
-  fun trackCourtCaseEvent(case: Case, messageId: String) {
+  fun trackCourtCaseSplitEvent(case: Case, messageId: String) {
 
     val session = case.block.session
     val properties = mapOf(
@@ -29,7 +29,7 @@ class TelemetryService(private val telemetryClient: TelemetryClient) {
       SQS_MESSAGE_ID_KEY to messageId
     )
 
-    telemetryClient.trackEvent(TelemetryEventType.COURT_CASE_RECEIVED.eventName, properties, emptyMap())
+    telemetryClient.trackEvent(TelemetryEventType.COURT_CASE_SPLIT.eventName, properties, emptyMap())
   }
 
   companion object {

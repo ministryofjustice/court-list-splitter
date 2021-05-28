@@ -1,6 +1,6 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.1.7"
-  kotlin("plugin.spring") version "1.4.32"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.3.0"
+  kotlin("plugin.spring") version "1.5.10"
 }
 
 configurations {
@@ -25,6 +25,7 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
   testImplementation("org.mockito:mockito-core:3.9.0")
+  testImplementation("org.awaitility:awaitility:4.1.0")
 }
 
 tasks {
