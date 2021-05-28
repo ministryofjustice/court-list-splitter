@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.service
 
 import com.fasterxml.jackson.core.JsonProcessingException
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.courtlistsplitter.messaging.MessageParser
@@ -47,13 +48,25 @@ class MessageProcessor(
           block.cases.stream()
         }
       )
-      .forEach { messageNotifier.send(it, messageId) }
+      .forEach {
+        log.debug("Sending {}", it.caseNo)
+        messageNotifier.send(it, messageId)
+      }
   }
 
   private fun trackCourtListReceipt(documents: List<Document>, messageId: String) {
     documents.stream()
       .map { it.info }
       .distinct()
-      .forEach { info: Info -> telemetryService.trackCourtListEvent(info, messageId) }
+      .forEach { info: Info ->
+        run {
+          log.debug("Track court list event $info")
+          telemetryService.trackCourtListEvent(info, messageId)
+        }
+      }
+  }
+
+  companion object {
+    private val log = LoggerFactory.getLogger(this::class.java)
   }
 }

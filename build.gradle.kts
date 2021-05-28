@@ -1,6 +1,6 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.1.7"
-  kotlin("plugin.spring") version "1.4.32"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.3.0"
+  kotlin("plugin.spring") version "1.5.10"
 }
 
 configurations {
@@ -9,7 +9,8 @@ configurations {
 
 dependencies {
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
-  implementation("com.amazonaws:aws-java-sdk-sqs:1.11.899")
+  implementation("com.amazonaws:aws-java-sdk-sqs:1.11.1024")
+  implementation("com.amazonaws:aws-java-sdk-sns:1.11.1024")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
@@ -24,6 +25,7 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
   testImplementation("org.mockito:mockito-core:3.9.0")
+  testImplementation("org.awaitility:awaitility:4.1.0")
 }
 
 tasks {
