@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Profile
 
 @Profile("!test")
 @Configuration
-open class AwsMessagingConfig {
+class AwsMessagingConfig {
 
   @Primary
   @Bean
-  open fun amazonSQSAsync(
+  fun amazonSQSAsync(
     @Value("\${aws.region-name}") regionName: String,
     @Value("\${aws.sqs_endpoint_url}") awsEndpointUrl: String,
     @Value("\${aws_access_key_id}") awsAccessKeyId: String,
@@ -35,7 +35,7 @@ open class AwsMessagingConfig {
   }
 
   @Bean
-  open fun amazonSNSClient(
+  fun amazonSNSClient(
     @Value("\${aws.region-name}") regionName: String,
     @Value("\${aws_sns_access_key_id}") awsAccessKeyId: String,
     @Value("\${aws_sns_secret_access_key}") awsSecretAccessKey: String
