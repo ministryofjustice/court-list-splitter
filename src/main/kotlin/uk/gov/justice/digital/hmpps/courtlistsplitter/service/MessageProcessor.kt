@@ -49,7 +49,7 @@ class MessageProcessor(
         }
       )
       .forEach {
-        log.info("Sending {}", it.caseNo)
+        log.debug("Sending {}", it.caseNo)
         messageNotifier.send(it, messageId)
       }
   }
@@ -60,7 +60,7 @@ class MessageProcessor(
       .distinct()
       .forEach { info: Info ->
         run {
-          log.info("Track court list event $info")
+          log.debug("Track court list event $info")
           telemetryService.trackCourtListEvent(info, messageId)
         }
       }
