@@ -1,8 +1,9 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.messaging
 
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
@@ -15,16 +16,21 @@ internal class SqsMessageReceiverTest {
   private lateinit var messageProcessor: MessageProcessor
   private lateinit var sqsMessageReceiver: SqsMessageReceiver
 
-  @BeforeEach
-  fun beforeEach() {
-    sqsMessageReceiver = SqsMessageReceiver("queue-name", messageProcessor)
-  }
-
   @Test
   fun `should track event when message received`() {
+    sqsMessageReceiver = SqsMessageReceiver("queue-name", messageProcessor, false)
 
     sqsMessageReceiver.receive("message-content", "messageId")
 
     verify(messageProcessor).process("message-content", "messageId")
+  }
+
+  @Test
+  fun `should throw exception when message received and force-error flag is true`() {
+    sqsMessageReceiver = SqsMessageReceiver("queue-name", messageProcessor, true)
+
+    assertThrows<RuntimeException>("Simulating failure because features.send_all_messages_to_dlq flag is set") { sqsMessageReceiver.receive("message-content", "messageId") }
+
+    verify(messageProcessor, never()).process("message-content", "messageId")
   }
 }
