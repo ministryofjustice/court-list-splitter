@@ -1,37 +1,18 @@
+generic-service:
+  springProfiles: sqs-read
 
-minReplicaCount: 2
-maxReplicaCount: 4
+  ingress:
+    enabled: true
+    enable_whitelist: true
+    hosts:
+      - host: court-list-splitter-preprod.hmpps.service.justice.gov.uk
+        cert_secret: court-probation-preprod-cert-secret
+    path: /
 
-springProfiles: ""
-
-image:
-  repository: quay.io/hmpps/court-list-splitter
-  tag: latest
-  port: 8080
-
-ingress:
-  enabled: true
-  enable_whitelist: true
-  hosts:
-    - host: court-list-splitter-preprod.hmpps.service.justice.gov.uk
-      cert_secret: court-probation-preprod-cert-secret
-  path: /
-
-env:
-  JAVA_OPTS: "-Xmx512m"
-
-whitelist:
-  office: "217.33.148.210/32"
-  health-kick: "35.177.252.195/32"
-  mojvpn: "81.134.202.29/32"
-  cloudplatform-live1-1: "35.178.209.113/32"
-  cloudplatform-live1-2: "3.8.51.207/32"
-  cloudplatform-live1-3: "35.177.252.54/32"
-
-resources:
-  cpu:
-    limit: 1000m
-    request: 50m
-  memory:
-    limit: 1000Mi
-    request: 500Mi
+  resources:
+    cpu:
+      limit: 1000m
+      request: 50m
+    memory:
+      limit: 1000Mi
+      request: 500Mi
