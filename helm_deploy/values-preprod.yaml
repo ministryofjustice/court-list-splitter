@@ -1,5 +1,5 @@
 generic-service:
-  springProfiles: ""
+  springProfiles: sqs-read
 
   ingress:
     enabled: true
