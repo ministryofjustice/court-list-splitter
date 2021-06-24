@@ -9,3 +9,9 @@ generic-service:
         cert_secret: court-probation-dev-cert-secret
     path: /
 
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 2
+    targetCPUUtilizationPercentage: 100
+

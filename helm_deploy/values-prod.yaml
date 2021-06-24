@@ -16,3 +16,9 @@ generic-service:
     memory:
       limit: 1000Mi
       request: 500Mi
+
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 100
