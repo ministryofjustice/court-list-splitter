@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.2
+  hmpps: ministryofjustice/hmpps@3.5
   jira: circleci/jira@1.2.2
 
 executors:
@@ -197,6 +197,10 @@ workflows:
                 - main
     jobs:
       - hmpps/gradle_owasp_dependency_check:
+          slack_channel: probation_in_court_dev
+          context:
+            - hmpps-common-vars
+      - hmpps/trivy_latest_scan:
           slack_channel: probation_in_court_dev
           context:
             - hmpps-common-vars
