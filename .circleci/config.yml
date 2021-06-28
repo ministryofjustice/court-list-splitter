@@ -197,9 +197,11 @@ workflows:
                 - main
     jobs:
       - hmpps/gradle_owasp_dependency_check:
+          slack_channel: probation_in_court_dev
           context:
             - hmpps-common-vars
       - hmpps/veracode_policy_scan:
+          slack_channel: probation_in_court_dev
           context:
             - hmpps-common-vars
             - veracode-credentials
