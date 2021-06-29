@@ -15,3 +15,11 @@ generic-service:
     maxReplicas: 2
     targetCPUUtilizationPercentage: 100
 
+  resources:
+    cpu:
+      limit: 1000m
+      request: 50m
+    memory:
+      limit: 1000Mi
+      request: 500Mi
+
