@@ -11,11 +11,11 @@ generic-service:
 
   resources:
     cpu:
-      limit: 1000m
-      request: 50m
+      limit: 5000m
+      request: 500m
     memory:
-      limit: 1000Mi
-      request: 500Mi
+      limit: 1200Mi
+      request: 700Mi
 
   autoscaling:
     enabled: true
