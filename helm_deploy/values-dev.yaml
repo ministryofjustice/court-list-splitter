@@ -16,10 +16,10 @@ generic-service:
     targetCPUUtilizationPercentage: 100
 
   resources:
-    cpu:
-      limit: 5000m
-      request: 250m
-    memory:
-      limit: 1200Mi
-      request: 350Mi
+    limits:
+      cpu: 5000m
+      memory: 1200Mi
+    requests:
+      cpu: 250m
+      memory: 350Mi
 
