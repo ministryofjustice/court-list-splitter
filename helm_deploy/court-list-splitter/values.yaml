@@ -11,8 +11,7 @@ generic-service:
 
   ingress:
     enabled: true
-    host: app-hostname.local    # override per environment
-    tlsSecretName: court-list-splitter-cert
+    enable_whitelist: true
     path: /
 
   # Environment variables to load into the deployment

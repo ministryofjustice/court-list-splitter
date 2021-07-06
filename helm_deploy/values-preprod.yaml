@@ -2,12 +2,8 @@ generic-service:
   springProfiles: sqs-read
 
   ingress:
-    enabled: true
-    enable_whitelist: true
-    hosts:
-      - host: court-list-splitter-preprod.hmpps.service.justice.gov.uk
-        cert_secret: court-probation-preprod-cert-secret
-    path: /
+    host: court-list-splitter-preprod.hmpps.service.justice.gov.uk
+    tlsSecretName: court-probation-preprod-cert-secret
 
   resources:
     limits:
