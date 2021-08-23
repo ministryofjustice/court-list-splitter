@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.8
+  hmpps: ministryofjustice/hmpps@3.10
   jira: circleci/jira@1.2.2
 
 executors:
@@ -204,10 +204,24 @@ workflows:
           slack_channel: probation_in_court_dev
           context:
             - hmpps-common-vars
-      - hmpps/veracode_policy_scan:
+      - hmpps/veracode_pipeline_scan:
           slack_channel: probation_in_court_dev
           context:
             - hmpps-common-vars
             - veracode-credentials
+  security-weekly:
+    triggers:
+      - schedule:
+          cron: "30 6 * * 1"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - hmpps/veracode_policy_scan:
+          slack_channel: probation_in_court_dev
+          context:
+            - veracode-credentials
+            - hmpps-common-vars
 
 
