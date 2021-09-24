@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/court-list-splitter.svg?style=svg)](https://circleci.com/gh/ministryofjustice/court-list-splitter)
 
-This service will provide the capability to read a message from configured Amazon SQS queue. This message will is split, 
+This service will provide the capability to read a message from configured Amazon SQS queue. The message received is a LIBRA court feed and contains multiple court cases. The service will split this message into its consituent cases and publish each to a configured Amazon SNS topic.
 
 ## Quickstart
 
