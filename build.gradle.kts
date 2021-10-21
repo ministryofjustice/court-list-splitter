@@ -8,9 +8,16 @@ configurations {
 }
 
 dependencies {
+  implementation("org.springframework.boot:spring-boot-starter-web:2.5.5") {
+    implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.54")
+    implementation("org.apache.tomcat.embed:tomcat-embed-el:9.0.54")
+    implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.54")
+    because("Unpatched vulnerability CVE-2021-42340 in tomcat-embed-*:9.0.53")
+  }
+
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
-  implementation("com.amazonaws:aws-java-sdk-sqs:1.11.1024")
-  implementation("com.amazonaws:aws-java-sdk-sns:1.11.1024")
+  implementation("com.amazonaws:aws-java-sdk-sqs:1.12.90")
+  implementation("com.amazonaws:aws-java-sdk-sns:1.12.90")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
@@ -23,8 +30,8 @@ dependencies {
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
-  testImplementation("org.mockito:mockito-core:3.9.0")
+  testImplementation("com.github.tomakehurst:wiremock-jre8:2.31.0")
+  testImplementation("org.mockito:mockito-core:4.0.0")
   testImplementation("org.awaitility:awaitility:4.1.0")
 }
 
@@ -94,4 +101,7 @@ task<Test>("integrationTest") {
   testLogging.showExceptions = true
   testLogging.showStackTraces = true
   include("**/*IntTest*")
+}
+repositories {
+  mavenCentral()
 }
