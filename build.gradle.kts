@@ -9,7 +9,7 @@ configurations {
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web:2.5.6") {
-    implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.54")
+    implementation("org.apache.tomcat.embed:tomcat-embed-core:10.0.12")
     implementation("org.apache.tomcat.embed:tomcat-embed-el:9.0.54")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.54")
     because("Unpatched vulnerability CVE-2021-42340 in tomcat-embed-*:9.0.53")
