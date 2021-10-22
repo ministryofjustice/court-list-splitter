@@ -16,7 +16,7 @@ dependencies {
   }
 
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
-  implementation("com.amazonaws:aws-java-sdk-sqs:1.12.92")
+  implementation("com.amazonaws:aws-java-sdk-sqs:1.12.93")
   implementation("com.amazonaws:aws-java-sdk-sns:1.12.90")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
   implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -26,7 +26,7 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation(platform("org.junit:junit-bom:5.7.1"))
+  testImplementation(platform("org.junit:junit-bom:5.8.1"))
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
