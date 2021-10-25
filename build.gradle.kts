@@ -22,7 +22,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
-  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.4")
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
