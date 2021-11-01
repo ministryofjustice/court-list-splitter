@@ -7,17 +7,13 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.5.6") {
-    implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.54")
-    implementation("org.apache.tomcat.embed:tomcat-embed-el:9.0.54")
-    implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.54")
-    because("Unpatched vulnerability CVE-2021-42340 in tomcat-embed-*:9.0.53")
-  }
+var awsSdkVersion = "1.12.99"
 
+dependencies {
+  implementation("org.springframework.boot:spring-boot-starter-web:2.5.6")
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
-  implementation("com.amazonaws:aws-java-sdk-sqs:1.12.98")
-  implementation("com.amazonaws:aws-java-sdk-sns:1.12.98")
+  implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
+  implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
