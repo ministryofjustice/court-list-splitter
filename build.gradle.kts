@@ -10,7 +10,7 @@ configurations {
 var awsSdkVersion = "1.12.113"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.5.6")
+  implementation("org.springframework.boot:spring-boot-starter-web:2.5.7")
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
   implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
