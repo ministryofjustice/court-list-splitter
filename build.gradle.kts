@@ -10,12 +10,18 @@ configurations {
 var awsSdkVersion = "1.12.128"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
+  implementation("org.springframework.boot:spring-boot-starter-web:2.6.1") {
+    implementation("org.apache.logging.log4j:log4j-api:2.15.0")
+    because("vulnerability in packaged version 2.14.1")
+  }
+  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.1") {
+    implementation("org.apache.logging.log4j:log4j-api:2.15.0")
+    because("vulnerability in packaged version 2.14.1")
+  }
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
   implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
-  implementation("org.springframework.boot:spring-boot-starter-validation")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.4")
