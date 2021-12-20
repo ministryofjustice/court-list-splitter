@@ -18,7 +18,7 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:2.15.0")
     because("vulnerability in packaged version 2.14.1")
   }
-  implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
+  implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
   implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
