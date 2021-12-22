@@ -1,6 +1,6 @@
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.3.15"
-  kotlin("plugin.spring") version "1.6.0"
+  kotlin("plugin.spring") version "1.6.10"
 }
 
 configurations {
@@ -14,7 +14,7 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:2.17.0")
     because("vulnerability in packaged version 2.14.1")
   }
-  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.1") {
+  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.2") {
     implementation("org.apache.logging.log4j:log4j-api:2.17.0")
     because("vulnerability in packaged version 2.14.1")
   }
