@@ -10,11 +10,11 @@ configurations {
 var awsSdkVersion = "1.12.129"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.6.1") {
+  implementation("org.springframework.boot:spring-boot-starter-web:2.6.2") {
     implementation("org.apache.logging.log4j:log4j-api:2.17.0")
     because("vulnerability in packaged version 2.14.1")
   }
-  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.1") {
+  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.2") {
     implementation("org.apache.logging.log4j:log4j-api:2.17.0")
     because("vulnerability in packaged version 2.14.1")
   }
