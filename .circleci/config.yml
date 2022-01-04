@@ -209,17 +209,17 @@ workflows:
             - court-probation-prod
           requires:
             - request-prod-approval
-#      - hmpps/deploy_env:
-#          name: deploy_live_prod
-#          env: "prod"
-#          helm_additional_args: --values ./court-list-splitter/values-live.yaml
-#          slack_channel_name: probation_in_court_dev
-#          slack_notification: true
-#          context:
-#            - hmpps-common-vars
-#            - court-probation-live-prod
-#          requires:
-#            - request-prod-approval
+      - hmpps/deploy_env:
+          name: deploy_live_prod
+          env: "prod"
+          helm_additional_args: --values ./court-list-splitter/values-live.yaml
+          slack_channel_name: probation_in_court_dev
+          slack_notification: true
+          context:
+            - hmpps-common-vars
+            - court-probation-live-prod
+          requires:
+            - request-prod-approval
 
   test-integration:
     jobs:
