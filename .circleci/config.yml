@@ -68,37 +68,6 @@ jobs:
             - build.gradle.kts
             - app_version.txt
 
-  deploy_dev:
-    executor: deployer
-    steps:
-      - deploy_to_env:
-          env: "dev"
-      - jira/notify:
-          environment: dev
-          environment_type: development
-          token_name: JIRA_CIRCLE_TOKEN
-          job_type: deployment
-  deploy_preprod:
-    executor: deployer
-    steps:
-      - deploy_to_env:
-          env: "preprod"
-      - jira/notify:
-          environment: preprod
-          environment_type: testing
-          token_name: JIRA_CIRCLE_TOKEN
-          job_type: deployment
-  deploy_prod:
-    executor: deployer
-    steps:
-      - deploy_to_env:
-          env: "prod"
-      - jira/notify:
-          environment: prod
-          environment_type: production
-          token_name: JIRA_CIRCLE_TOKEN
-          job_type: deployment
-
   test-integration:
     executor: validator-integration
     steps:
@@ -147,19 +116,6 @@ workflows:
       - hmpps/deploy_env:
           name: deploy_dev
           env: "dev"
-          helm_additional_args: --values ./court-list-splitter/values-live1.yaml
-          context: hmpps-common-vars
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-            - build_docker
-            - helm_lint
-      - hmpps/deploy_env:
-          name: deploy_live_dev
-          env: "dev"
           helm_additional_args: --values ./court-list-splitter/values-live.yaml
           context:
             - hmpps-common-vars
@@ -179,15 +135,6 @@ workflows:
       - hmpps/deploy_env:
           name: deploy_preprod
           env: "preprod"
-          helm_additional_args: --values ./court-list-splitter/values-live1.yaml
-          context:
-            - hmpps-common-vars
-            - court-probation-preprod
-          requires:
-            - request-preprod-approval
-      - hmpps/deploy_env:
-          name: deploy_live_preprod
-          env: "preprod"
           helm_additional_args: --values ./court-list-splitter/values-live.yaml
           context:
             - hmpps-common-vars
@@ -200,17 +147,6 @@ workflows:
             - deploy_preprod
       - hmpps/deploy_env:
           name: deploy_prod
-          env: "prod"
-          helm_additional_args: --values ./court-list-splitter/values-live1.yaml
-          slack_channel_name: probation_in_court_dev
-          slack_notification: true
-          context:
-            - hmpps-common-vars
-            - court-probation-prod
-          requires:
-            - request-prod-approval
-      - hmpps/deploy_env:
-          name: deploy_live_prod
           env: "prod"
           helm_additional_args: --values ./court-list-splitter/values-live.yaml
           slack_channel_name: probation_in_court_dev
@@ -261,5 +197,3 @@ workflows:
           context:
             - veracode-credentials
             - hmpps-common-vars
-
-
