@@ -1,12 +1,12 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.messaging
 
-import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.MessageProcessor
 
 @ExtendWith(MockitoExtension::class)

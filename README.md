@@ -17,6 +17,10 @@ Build and test:
 ./gradlew build
 ```
 
+Install Git hooks (Optional):
+
+```./gradlew installGitHooks```
+
 ### Integration tests
 
 These require an SQS queue which can be initialised with localstack (https://github.com/localstack/localstack). There is a docker compose config file and a script which creates the required queues.

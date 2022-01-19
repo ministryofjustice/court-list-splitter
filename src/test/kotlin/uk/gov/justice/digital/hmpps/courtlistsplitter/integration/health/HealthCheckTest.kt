@@ -1,8 +1,8 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.integration.health
 
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.whenever
 import org.springframework.boot.actuate.health.Health
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles

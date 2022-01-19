@@ -3,13 +3,13 @@ package uk.gov.justice.digital.hmpps.courtlistsplitter.service
 import com.amazonaws.services.sqs.AmazonSQSAsync
 import com.amazonaws.services.sqs.model.GetQueueUrlResult
 import com.amazonaws.services.sqs.model.QueueDoesNotExistException
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.whenever
 
 @ExtendWith(MockitoExtension::class)
 internal class SqsServiceTest {
