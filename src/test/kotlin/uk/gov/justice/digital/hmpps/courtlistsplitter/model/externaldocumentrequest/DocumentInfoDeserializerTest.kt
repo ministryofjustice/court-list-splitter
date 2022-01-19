@@ -5,13 +5,13 @@ import com.fasterxml.jackson.core.ObjectCodec
 import com.fasterxml.jackson.core.TreeNode
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.whenever
 import java.io.IOException
 import java.time.LocalDate
 import java.time.Month

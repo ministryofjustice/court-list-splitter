@@ -16,7 +16,7 @@ class InfoTest : IntegrationTestBase() {
       .expectStatus()
       .isOk
       .expectBody()
-      .jsonPath("app.name").isEqualTo("Court List Splitter")
+      .jsonPath("build.name").isEqualTo("court-list-splitter")
   }
 
   @Test

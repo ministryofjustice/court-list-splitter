@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.service
 
 import com.microsoft.applicationinsights.TelemetryClient
-import com.nhaarman.mockitokotlin2.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.MapEntry
 import org.junit.jupiter.api.Test
@@ -12,6 +11,7 @@ import org.mockito.Captor
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.verify
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Info
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.buildCase
 import java.time.LocalDate

@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.3.15"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.0.1"
   kotlin("plugin.spring") version "1.6.10"
 }
 
@@ -106,4 +106,9 @@ task<Test>("integrationTest") {
 }
 repositories {
   mavenCentral()
+}
+
+tasks.register<Copy>("installGitHooks") {
+  from(layout.projectDirectory.dir("hooks"))
+  into(layout.projectDirectory.dir(".git/hooks"))
 }
