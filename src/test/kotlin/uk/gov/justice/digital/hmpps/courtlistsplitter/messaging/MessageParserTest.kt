@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.messaging
 
 import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -83,8 +84,8 @@ class MessageParserTest {
       val thrown = catchThrowable {
         gatewayMessageParser.parseMessage("<msg>sss</msg>", MessageType::class.java)
       }
-      val ex = thrown as ConstraintViolationException
-      assertThat(ex.constraintViolations).hasSize(2)
+      val ex = thrown as MismatchedInputException
+      assertThat(ex.message).contains("sss")
     }
 
     @Test
