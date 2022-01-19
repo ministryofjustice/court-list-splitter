@@ -6,13 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.courtlistsplitter.messaging.MessageParser
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Block
-import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Case
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Document
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.ExternalDocumentRequest
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Info
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Session
-import java.util.function.Function
-import java.util.stream.Stream
 
 @Service
 class MessageProcessor(
@@ -33,21 +30,15 @@ class MessageProcessor(
 
     documents
       .stream()
-      .flatMap<Session>(
-        Function<Document, Stream<Session>> { document: Document ->
-          document.data.job.sessions.stream()
-        }
-      )
-      .flatMap<Block>(
-        Function<Session, Stream<Block>> { session: Session ->
-          session.blocks.stream()
-        }
-      )
-      .flatMap<Case>(
-        Function<Block, Stream<Case>> { block: Block ->
-          block.cases.stream()
-        }
-      )
+      .flatMap { document: Document ->
+        document.data.job.sessions.stream()
+      }
+      .flatMap { session: Session ->
+        session.blocks.stream()
+      }
+      .flatMap { block: Block ->
+        block.cases.stream()
+      }
       .forEach {
         log.debug("Sending {}", it.caseNo)
         messageNotifier.send(it, messageId)
