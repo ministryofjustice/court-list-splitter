@@ -1,8 +1,13 @@
 version: 2.1
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.11.10
+  hmpps: ministryofjustice/hmpps@3.12.0
   jira: circleci/jira@1.2.2
+
+parameters:
+  additional_docker_build_args:
+    type: string
+    default: ""
 
 executors:
   deployer:
@@ -109,6 +114,7 @@ workflows:
           name: helm_lint
       - hmpps/build_docker:
           name: build_docker
+          additional_docker_build_args: << pipeline.parameters.additional_docker_build_args >>
           filters:
             branches:
               only:
