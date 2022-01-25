@@ -1,0 +1,2 @@
+# Cannot install fixed version, apt-get claims the version does not exist having attempted multiple workarounds. Accept as low risk.
+CVE-2021-43618
