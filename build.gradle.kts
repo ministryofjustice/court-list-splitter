@@ -7,10 +7,10 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.143"
+var awsSdkVersion = "1.12.146"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.6.2") {
+  implementation("org.springframework.boot:spring-boot-starter-web:2.6.3") {
     implementation("org.apache.logging.log4j:log4j-api:2.17.1")
     because("vulnerability in packaged version 2.14.1")
   }
@@ -33,7 +33,7 @@ dependencies {
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.32.0")
-  testImplementation("org.mockito:mockito-core:4.2.0")
+  testImplementation("org.mockito:mockito-core:4.3.0")
   testImplementation("org.awaitility:awaitility:4.1.1")
 }
 
