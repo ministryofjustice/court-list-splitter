@@ -18,7 +18,7 @@ dependencies {
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.58")
     because("vulnerability in packaged version 9.0.56")
   }
-  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.2") {
+  implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3") {
     implementation("org.apache.logging.log4j:log4j-api:2.17.1")
     because("vulnerability in packaged version 2.14.1")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.58")
