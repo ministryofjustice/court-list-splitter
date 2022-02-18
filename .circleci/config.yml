@@ -110,6 +110,10 @@ workflows:
           filters:
             tags:
               ignore: /.*/
+      - hmpps/gradle_owasp_dependency_check:
+          slack_channel: probation_in_court_dev
+          context:
+            - hmpps-common-vars
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/build_docker:
