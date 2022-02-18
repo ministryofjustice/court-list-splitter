@@ -13,7 +13,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web:2.6.3") {
     implementation("org.apache.logging.log4j:log4j-api:2.17.1")
     because("vulnerability in packaged version 2.14.1")
-    implementation("org.apache.tomcat.embed:tomcat-embed-core:9.0.58")
+    implementation("org.apache.tomcat.embed:tomcat-embed-core:10.0.16")
     implementation("org.apache.tomcat.embed:tomcat-embed-el:9.0.58")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.58")
     because("vulnerability in packaged version 9.0.56")
