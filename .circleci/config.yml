@@ -95,10 +95,10 @@ workflows:
       - hmpps/build_docker:
           name: build_docker
           additional_docker_build_args: << pipeline.parameters.additional_docker_build_args >>
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
       - hmpps/deploy_env:
           name: deploy_dev
           env: "dev"
