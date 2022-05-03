@@ -62,6 +62,9 @@ data class Case(
   @JacksonXmlProperty(localName = "listno")
   val listNo: String? = null,
 
+  @JacksonXmlProperty(localName = "urn")
+  val urn: String? = null,
+
   @JacksonXmlProperty(localName = "nationality_1")
   val nationality1: String? = null,
 
