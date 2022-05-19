@@ -18,7 +18,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
-  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2")
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.3")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -26,7 +26,7 @@ dependencies {
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.33.1")
+  testImplementation("com.github.tomakehurst:wiremock-jre8:2.33.2")
   testImplementation("org.mockito:mockito-core:4.4.0")
   testImplementation("org.awaitility:awaitility:4.2.0")
 }
