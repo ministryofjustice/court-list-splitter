@@ -27,7 +27,7 @@ dependencies {
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.33.1")
-  testImplementation("org.mockito:mockito-core:4.4.0")
+  testImplementation("org.mockito:mockito-core:4.5.0")
   testImplementation("org.awaitility:awaitility:4.2.0")
 }
 
