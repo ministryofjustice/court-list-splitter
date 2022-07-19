@@ -11,6 +11,9 @@ generic-service:
     maxReplicas: 2
     targetCPUUtilizationPercentage: 100
 
+  poddisruptionbudget:
+    enabled: false
+
   resources:
     limits:
       cpu: 5000m
