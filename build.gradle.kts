@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.4.1"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.5.1"
   kotlin("plugin.spring") version "1.7.10"
 }
 
@@ -7,10 +7,10 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.283"
+var awsSdkVersion = "1.12.301"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.7.2")
+  implementation("org.springframework.boot:spring-boot-starter-web:2.7.3")
   implementation("org.springframework.boot:spring-boot-starter-validation:2.7.3")
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
@@ -18,7 +18,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
-  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.3")
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
