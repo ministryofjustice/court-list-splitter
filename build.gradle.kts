@@ -22,7 +22,7 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation(platform("org.junit:junit-bom:5.9.0"))
+  testImplementation(platform("org.junit:junit-bom:5.9.1"))
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
