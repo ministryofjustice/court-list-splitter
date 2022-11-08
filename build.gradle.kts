@@ -18,7 +18,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
-  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4")
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.0")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
