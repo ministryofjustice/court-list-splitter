@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.5.7"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.8.1"
   kotlin("plugin.spring") version "1.7.21"
 }
 
@@ -10,8 +10,9 @@ configurations {
 var awsSdkVersion = "1.12.337"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.7.5")
-  implementation("org.springframework.boot:spring-boot-starter-validation:2.7.5")
+  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-validation")
+
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
   implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
@@ -34,7 +35,7 @@ dependencies {
 tasks {
   compileKotlin {
     kotlinOptions {
-      jvmTarget = "15"
+      jvmTarget = "16"
     }
   }
 
