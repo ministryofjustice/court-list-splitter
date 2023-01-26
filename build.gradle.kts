@@ -39,6 +39,12 @@ tasks {
     }
   }
 
+  compileTestKotlin {
+    kotlinOptions {
+      jvmTarget = "16"
+    }
+  }
+
   test {
     useJUnitPlatform()
     testLogging.showExceptions = true
