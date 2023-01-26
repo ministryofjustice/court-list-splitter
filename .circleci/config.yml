@@ -13,7 +13,7 @@ jobs:
   build:
     executor:
       name: hmpps/java
-      tag: "16.0"
+      tag: "19.0"
     steps:
       - checkout
       - restore_cache:
@@ -53,7 +53,7 @@ jobs:
     executor:
       name: hmpps/localstack
       services: sqs,sns
-      jdk_tag: "16.0"
+      jdk_tag: "19.0"
       localstack_tag: "0.11.2"
     steps:
       - checkout
