@@ -1,17 +1,18 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.5.7"
-  kotlin("plugin.spring") version "1.7.20"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.8.1"
+  kotlin("plugin.spring") version "1.8.0"
 }
 
 configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.337"
+var awsSdkVersion = "1.12.393"
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web:2.7.5")
-  implementation("org.springframework.boot:spring-boot-starter-validation:2.7.5")
+  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-validation")
+
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
   implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
@@ -22,19 +23,25 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation(platform("org.junit:junit-bom:5.9.1"))
+  testImplementation(platform("org.junit:junit-bom:5.9.2"))
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
-  testImplementation("org.mockito:mockito-core:4.8.1")
+  testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
+  testImplementation("org.mockito:mockito-core:5.0.0")
   testImplementation("org.awaitility:awaitility:4.2.0")
 }
 
 tasks {
   compileKotlin {
     kotlinOptions {
-      jvmTarget = "15"
+      jvmTarget = "19"
+    }
+  }
+
+  compileTestKotlin {
+    kotlinOptions {
+      jvmTarget = "19"
     }
   }
 
