@@ -7,7 +7,7 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.393"
+var awsSdkVersion = "1.12.396"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
