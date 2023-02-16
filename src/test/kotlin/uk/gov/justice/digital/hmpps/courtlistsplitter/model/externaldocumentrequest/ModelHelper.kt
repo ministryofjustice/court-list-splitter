@@ -8,8 +8,8 @@ fun buildCase(caseNo: String?, dateOfHearing: LocalDate?, courtCode: String?): C
   val name = Name(title = "Mr.", forename1 = "David", forename2 = "Robert", surname = "BOWIE")
   val address = Address(line1 = "10 Downing St", line5 = "London", pcode = "SW1A 2AA")
 
-  val offence1 = Offence(1, "Summary 1", "Title 1", "AS 1")
-  val offence2 = Offence(2, "Summary 2", "Title 2", "AS 2")
+  val offence1 = Offence(1, "Summary 1", "Title 1", "AS 1", "RW89008")
+  val offence2 = Offence(2, "Summary 2", "Title 2", "AS 2", "CJ88160")
 
   val session = Session(
     1L,

@@ -18,5 +18,8 @@ data class Offence(
   val title: String?,
 
   @JacksonXmlProperty(localName = "as")
-  val act: String?
+  val act: String?,
+
+  @JacksonXmlProperty(localName = "code")
+  val code: String?
 )
