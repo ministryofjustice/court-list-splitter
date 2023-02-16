@@ -7,7 +7,7 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.337"
+var awsSdkVersion = "1.12.397"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -23,12 +23,12 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation(platform("org.junit:junit-bom:5.9.1"))
+  testImplementation(platform("org.junit:junit-bom:5.9.2"))
   testRuntimeOnly("org.junit.jupiter:junit-jupiter")
 
   testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
-  testImplementation("org.mockito:mockito-core:4.8.1")
+  testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
+  testImplementation("org.mockito:mockito-core:5.1.1")
   testImplementation("org.awaitility:awaitility:4.2.0")
 }
 
