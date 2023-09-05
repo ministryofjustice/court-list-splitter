@@ -7,7 +7,7 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.397"
+var awsSdkVersion = "1.12.543"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -16,6 +16,7 @@ dependencies {
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
   implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
   implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
+  implementation("com.amazonaws:aws-java-sdk-sts:$awsSdkVersion")
   implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
