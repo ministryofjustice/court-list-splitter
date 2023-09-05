@@ -34,13 +34,9 @@ generic-service:
     court-list-splitter:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
     crime-portal-gateway-queue-credentials:
-      AWS_ACCESS_KEY_ID: access_key_id
-      AWS_SECRET_ACCESS_KEY: secret_access_key
       AWS_SQS_QUEUE_NAME: sqs_name
       AWS_SQS_ENDPOINT_URL: sqs_id
     court-case-events-topic:
-      AWS_SNS_ACCESS_KEY_ID: access_key_id
-      AWS_SNS_SECRET_ACCESS_KEY: secret_access_key
       AWS_SNS_TOPIC_ARN: topic_arn
 
   allowlist:
