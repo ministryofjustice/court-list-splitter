@@ -135,6 +135,7 @@ workflows:
           name: deploy_prod
           env: "prod"
           helm_additional_args: --values ./court-list-splitter/values-live.yaml
+          helm_timeout: 10m
           slack_channel_name: probation_in_court_dev
           slack_notification: true
           context:
