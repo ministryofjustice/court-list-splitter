@@ -39,3 +39,27 @@ Run integration tests
 [ktlint](https://github.com/pinterest/ktlint) is the authority on style and is enforced on build.
 
 Run `./gradlew ktlintFormat` to fix formatting errors in your code before commit.
+
+## Accessing AWS Resources
+
+The service uses IAM Roles for Service Accounts (IRSA) rather than an AWS access key id and secret to access
+SQS queues and SNS topics. There is therefore no need to programmatically specify credentials as authentication
+takes place behind the scenes using a `WebIdentityTokenFileCredentialsProvider` which requires the
+AWS sts module to be on the classpath and in the [build.gradle.kts](build.gradle.kts):
+
+```
+implementation("com.amazonaws:aws-java-sdk-sts:$awsSdkVersion")
+```
+ 
+As this service uses [hmpps-helm-charts](https://ministryofjustice.github.io/hmpps-helm-charts/) as a template, the default service account name needs to be overridden
+in the [values.yaml](./helm_deploy/court-list-splitter/values.yaml) to include the IRSA service account name associated with the k8s namespace:
+
+```
+generic-service:
+  nameOverride: court-list-splitter
+  replicaCount: 4
+  serviceAccountName: "court-case-service"
+  ....
+  ....
+```
+
