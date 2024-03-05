@@ -6,8 +6,6 @@ import org.mockito.kotlin.whenever
 import org.springframework.boot.actuate.health.Health
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
-import uk.gov.justice.digital.hmpps.courtlistsplitter.health.SnsCheck
-import uk.gov.justice.digital.hmpps.courtlistsplitter.health.SqsCheck
 import uk.gov.justice.digital.hmpps.courtlistsplitter.integration.IntegrationTestBase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

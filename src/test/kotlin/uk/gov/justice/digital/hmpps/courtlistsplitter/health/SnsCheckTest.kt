@@ -8,7 +8,6 @@ import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.whenever
 import org.springframework.boot.actuate.health.Status
-import uk.gov.justice.digital.hmpps.courtlistsplitter.service.SnsService
 
 @ExtendWith(MockitoExtension::class)
 internal class SnsCheckTest {

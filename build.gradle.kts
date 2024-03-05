@@ -7,17 +7,12 @@ configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
 
-var awsSdkVersion = "1.12.543"
-
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
-  implementation("com.amazonaws:aws-java-sdk-sqs:$awsSdkVersion")
-  implementation("com.amazonaws:aws-java-sdk-sns:$awsSdkVersion")
-  implementation("com.amazonaws:aws-java-sdk-sts:$awsSdkVersion")
-  implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:1.3.1")
 
   // Spring uses 2.11.4 - using 2.12.3 breaks Spring.
   implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4")

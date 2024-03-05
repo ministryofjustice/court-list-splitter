@@ -7,8 +7,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.availability.AvailabilityChangeEvent.publish
 import org.springframework.stereotype.Component
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Case
+import uk.gov.justice.hmpps.sqs.HmppsQueueService
+import uk.gov.justice.hmpps.sqs.MissingTopicException
 
 private const val MESSAGE_TYPE = "LIBRA_COURT_CASE"
 
@@ -19,10 +22,12 @@ class MessageNotifier(
   @Autowired
   private val telemetryService: TelemetryService,
   @Autowired
-  private val amazonSNSClient: AmazonSNS,
-  @Value("\${aws_sns_topic_arn}")
-  private val topicArn: String
+  private val hmppsQueueService: HmppsQueueService
+
 ) {
+
+  private val topic = hmppsQueueService.findByTopicId("courtcaseeventstopic") ?: throw MissingTopicException("Could not find topic outboundtopic")
+
   fun send(case: Case, messageId: String) {
     telemetryService.trackCourtCaseSplitEvent(case, messageId)
     val message = objectMapper.writeValueAsString(case)
@@ -32,10 +37,11 @@ class MessageNotifier(
       .withDataType("String")
       .withStringValue(MESSAGE_TYPE)
 
-    val publishRequest = PublishRequest(topicArn, message)
+
+    val publishRequest = PublishRequest(topic.arn, message)
       .withMessageAttributes(mapOf("messageType" to messageValue))
 
-    val publishResult = amazonSNSClient.publish(publishRequest)
+    val publishResult = topic.snsClient.publish(publishRequest)
     log.info("Published message with subject {} with message Id {}", subject, publishResult.messageId)
   }
 
