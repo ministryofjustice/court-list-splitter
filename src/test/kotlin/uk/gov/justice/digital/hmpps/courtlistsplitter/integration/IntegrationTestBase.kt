@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.courtlistsplitter.integration
 
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.model.PurgeQueueRequest
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -23,6 +24,9 @@ abstract class IntegrationTestBase {
 
   @Autowired
   lateinit var hmppsQueueService: HmppsQueueService
+
+  @Autowired
+  lateinit var objectMapper: ObjectMapper
 
   val crimePortalGatewayTopic by lazy {
     hmppsQueueService.findByTopicId("crimeportalgatewaytopic")
