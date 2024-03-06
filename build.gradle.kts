@@ -20,8 +20,7 @@ dependencies {
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
   testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
-
-  testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
+  testImplementation("org.testcontainers:localstack:1.18.1")
 }
 
 tasks {

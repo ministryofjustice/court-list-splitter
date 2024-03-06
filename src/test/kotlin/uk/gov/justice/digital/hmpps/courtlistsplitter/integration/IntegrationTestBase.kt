@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.web.reactive.server.WebTestClient
+import uk.gov.justice.digital.hmpps.courtlistsplitter.integration.LocalStackContainer.setLocalStackProperties
 import uk.gov.justice.hmpps.sqs.HmppsQueueService
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -43,4 +46,14 @@ abstract class IntegrationTestBase {
   internal fun AmazonSQS.countMessagesOnQueue(queueUrl: String): Int =
     this.getQueueAttributes(queueUrl, listOf("ApproximateNumberOfMessages"))
       .let { it.attributes["ApproximateNumberOfMessages"]?.toInt() ?: 0 }
+
+  companion object {
+    private val localStackContainer = LocalStackContainer.instance
+
+    @JvmStatic
+    @DynamicPropertySource
+    fun testcontainers(registry: DynamicPropertyRegistry) {
+      localStackContainer?.also { setLocalStackProperties(it, registry) }
+    }
+  }
 }
