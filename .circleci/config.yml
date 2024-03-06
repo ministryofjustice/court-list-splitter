@@ -50,6 +50,9 @@ jobs:
             - app_version.txt
 
   test-integration:
+    executor:
+      name: hmpps/java
+      tag: "19.0"
     steps:
       - checkout
       - restore_cache:
