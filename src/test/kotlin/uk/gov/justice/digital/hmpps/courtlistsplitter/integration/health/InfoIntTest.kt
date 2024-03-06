@@ -6,7 +6,7 @@ import uk.gov.justice.digital.hmpps.courtlistsplitter.integration.IntegrationTes
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class InfoTest : IntegrationTestBase() {
+class InfoIntTest : IntegrationTestBase() {
 
   @Test
   fun `Info page is accessible`() {

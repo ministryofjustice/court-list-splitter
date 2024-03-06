@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.courtlistsplitter.messaging
+package uk.gov.justice.digital.hmpps.courtlistsplitter.integration
 
 import com.amazonaws.services.sns.model.MessageAttributeValue
 import com.amazonaws.services.sns.model.PublishRequest
@@ -14,7 +14,6 @@ import org.mockito.kotlin.verify
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
-import uk.gov.justice.digital.hmpps.courtlistsplitter.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Info
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.CourtCaseMatcher
 import uk.gov.justice.digital.hmpps.courtlistsplitter.service.TelemetryService
@@ -26,7 +25,7 @@ import java.util.UUID
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("test", "sqs-read")
 class SqsMessageReceiverIntTest : IntegrationTestBase() {
 
   @MockBean
@@ -40,10 +39,10 @@ class SqsMessageReceiverIntTest : IntegrationTestBase() {
     crimePortalGatewayTopic?.snsClient?.publish(
       PublishRequest(crimePortalGatewayTopic?.arn, content)
         .withMessageAttributes(
-          mapOf("operation_Id" to MessageAttributeValue().withDataType("String").withStringValue(UUID.randomUUID().toString())),
+          mapOf("MessageId" to MessageAttributeValue().withDataType("String").withStringValue(UUID.randomUUID().toString())),
         ),
     )
-
+    crimePortalGatewayQueue?.sqsClient?.countMessagesOnQueue(crimePortalGatewayQueue?.queueUrl!!)
     await untilCallTo { courtCaseEventsQueue?.sqsClient?.countMessagesOnQueue(courtCaseEventsQueue?.queueUrl!!) } matches { it == 4 }
 
     val info1 = Info(7, "B01CY", LocalDate.of(2020, Month.FEBRUARY, 23))

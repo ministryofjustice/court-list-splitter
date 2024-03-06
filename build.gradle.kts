@@ -40,7 +40,7 @@ tasks {
     useJUnitPlatform()
     testLogging.showExceptions = true
     testLogging.showStackTraces = true
-    exclude("**/*IntTest*")
+    exclude("**/integration/**")
 
     val failedTests = mutableListOf<TestDescriptor>()
     val skippedTests = mutableListOf<TestDescriptor>()

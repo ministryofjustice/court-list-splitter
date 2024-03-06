@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 import java.util.function.Consumer
 
 @ActiveProfiles("test")
-class HealthCheckTest : IntegrationTestBase() {
+class HealthCheckIntTest : IntegrationTestBase() {
 
   @Test
   fun `Health page reports ok`() {
