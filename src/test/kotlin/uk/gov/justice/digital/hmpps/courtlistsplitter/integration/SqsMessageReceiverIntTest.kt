@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.integration
 
-import com.amazonaws.services.sns.model.MessageAttributeValue
 import com.amazonaws.services.sns.model.PublishRequest
 import org.awaitility.kotlin.await
 import org.awaitility.kotlin.matches
@@ -21,7 +20,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.LocalDate
 import java.time.Month
-import java.util.UUID
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -37,10 +35,7 @@ class SqsMessageReceiverIntTest : IntegrationTestBase() {
     val content = Files.readString(Paths.get("src/test/resources/messages/external-document-request-multi-session.xml"))
 
     crimePortalGatewayTopic?.snsClient?.publish(
-      PublishRequest(crimePortalGatewayTopic?.arn, content)
-        .withMessageAttributes(
-          mapOf("MessageId" to MessageAttributeValue().withDataType("String").withStringValue(UUID.randomUUID().toString())),
-        ),
+      PublishRequest(crimePortalGatewayTopic?.arn, content),
     )
     crimePortalGatewayQueue?.sqsClient?.countMessagesOnQueue(crimePortalGatewayQueue?.queueUrl!!)
     await untilCallTo { courtCaseEventsQueue?.sqsClient?.countMessagesOnQueue(courtCaseEventsQueue?.queueUrl!!) } matches { it == 4 }
