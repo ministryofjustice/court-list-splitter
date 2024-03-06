@@ -13,13 +13,13 @@ import uk.gov.justice.digital.hmpps.courtlistsplitter.service.MessageProcessor
 @Profile("sqs-read")
 class SqsMessageReceiver(
   @Autowired private val messageProcessor: MessageProcessor,
-  @Value("\${features.test.send_all_messages_to_dlq:false}") private val sendAllMessagesToDlq: Boolean = false
+  @Value("\${features.test.send_all_messages_to_dlq:false}") private val sendAllMessagesToDlq: Boolean = false,
 ) {
 
   @JmsListener(destination = "crimeportalgatewayqueue", containerFactory = "hmppsQueueContainerFactoryProxy")
-  fun receive(message: String) {
+  fun receive(message: String, @Header("MessageId") messageId: String) {
     if (sendAllMessagesToDlq) throw RuntimeException("Simulating failure because features.test.send_all_messages_to_dlq flag is set. Message will go to DLQ")
-    messageProcessor.process(message, "some-id") // TODO supply messageID properly
+    messageProcessor.process(message, messageId)
   }
 
   companion object {

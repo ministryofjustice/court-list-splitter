@@ -2,10 +2,6 @@ server:
   shutdown: immediate
   port: 8081
 
-management.endpoint:
-  health.cache.time-to-live: 0
-  info.cache.time-to-live: 0
-
 # Localstack settings
 hmpps.sqs:
   provider: localstack

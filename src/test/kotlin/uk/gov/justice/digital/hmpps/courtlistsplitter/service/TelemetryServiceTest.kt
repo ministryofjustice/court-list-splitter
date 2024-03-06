@@ -31,7 +31,6 @@ internal class TelemetryServiceTest {
 
   @Test
   fun `should track event`() {
-
     telemetryService.trackEvent(TelemetryEventType.COURT_LIST_RECEIVED)
 
     verify(telemetryClient).trackEvent("PiCCourtListReceived")
@@ -39,7 +38,6 @@ internal class TelemetryServiceTest {
 
   @Test
   fun `when message is received and split by courts and date then track the court list event with properties`() {
-
     val info = Info(ouCode = "B10JQ", dateOfHearing = LocalDate.of(2021, Month.DECEMBER, 25), sequence = 1L)
 
     telemetryService.trackCourtListEvent(info, "message-id")
@@ -54,7 +52,6 @@ internal class TelemetryServiceTest {
 
   @Test
   fun `when case is split`() {
-
     val case = buildCase(caseNo = "2134", dateOfHearing = LocalDate.of(2021, Month.DECEMBER, 25), courtCode = "B10JQ")
 
     telemetryService.trackCourtCaseSplitEvent(case, "message-id")

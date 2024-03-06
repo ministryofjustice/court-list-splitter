@@ -12,7 +12,7 @@ data class Name(
   val forename1: String? = null,
   val forename2: String? = null,
   val forename3: String? = null,
-  val surname: String? = null
+  val surname: String? = null,
 ) {
 
   @JsonIgnore
@@ -20,7 +20,7 @@ data class Name(
     return Stream.of(forename1, forename2, forename3)
       .filter { obj: String? ->
         Objects.nonNull(
-          obj
+          obj,
         )
       }
       .collect(Collectors.joining(" "))
@@ -32,7 +32,7 @@ data class Name(
     return Stream.of(title, forename1, forename2, forename3, surname)
       .filter { obj: String? ->
         Objects.nonNull(
-          obj
+          obj,
         )
       }
       .collect(Collectors.joining(" "))

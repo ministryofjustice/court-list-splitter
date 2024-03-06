@@ -66,6 +66,7 @@ internal class MessageProcessorTest {
 
     @MockBean
     private lateinit var messageNotifier: MessageNotifier
+
     @MockBean
     private lateinit var telemetryService: TelemetryService
 

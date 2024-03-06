@@ -8,7 +8,7 @@ configurations {
 }
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web")
+
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
   implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.4")
@@ -19,13 +19,9 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation(platform("org.junit:junit-bom:5.9.2"))
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter")
+  testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
 
-  testImplementation("org.springframework.boot:spring-boot-starter-webflux")
   testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
-  testImplementation("org.mockito:mockito-core:5.1.1")
-  testImplementation("org.awaitility:awaitility:4.2.0")
 }
 
 tasks {

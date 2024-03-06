@@ -1,23 +1,20 @@
 server:
   shutdown: immediate
 
-management.endpoint:
-  health.cache.time-to-live: 0
-  info.cache.time-to-live: 0
-
 # Localstack settings
-aws:
-  sqs_endpoint_url: "http://localhost:4566"
-  access_key_id: foobar
-  secret_access_key: foobar
-  region_name: eu-west-2
-  sqs:
-    queue_name: "crime-portal-gateway-queue"
-  sns:
-    topic_arn: "arn:aws:sns:eu-west-2:754256621582:topic_name"
-
-aws_access_key_id: foobar
-aws_secret_access_key: foobar
-aws_sns_access_key_id: foobar
-aws_sns_secret_access_key: foobar
-aws_sns_topic_arn: "arn:aws:sns:eu-west-2:000000000000:court-case-events-topic"
+hmpps.sqs:
+  provider: localstack
+  queues:
+    crimeportalgatewayqueue:
+      queueName: crime-portal-gateway-queue
+      dlqName: crime-portal-gateway-dlq
+      subscribeTopicId: crimeportalgatewaytopic
+    courtcaseeventsqueue:
+      queueName: court-case-events-queue
+      dlqName: court-case-events-dlq
+      subscribeTopicId: courtcaseeventstopic
+  topics:
+    crimeportalgatewaytopic:
+      arn: arn:aws:sns:eu-west-2:000000000000:crime-portal-gateway-topic
+    courtcaseeventstopic:
+      arn: arn:aws:sns:eu-west-2:000000000000:court-case-events-topic

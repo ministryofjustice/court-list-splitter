@@ -24,7 +24,7 @@ data class MessageHeader(
 
   @field:NotNull
   @JacksonXmlProperty(namespace = CSCI_HDR_NS, localName = "To")
-  val to: String?
+  val to: String?,
 )
 
 class MessageID(
@@ -32,5 +32,5 @@ class MessageID(
   @JacksonXmlProperty(localName = "UUID")
   val uuid: String? = null,
   @JacksonXmlProperty(localName = "RelatesTo")
-  val relatesTo: String? = null
+  val relatesTo: String? = null,
 )

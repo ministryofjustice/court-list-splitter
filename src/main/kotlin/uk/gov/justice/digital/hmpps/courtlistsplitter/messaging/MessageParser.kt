@@ -10,7 +10,7 @@ import javax.validation.Validator
 
 class MessageParser<T>(
   @Qualifier("messageXmlMapper") private val xmlMapper: XmlMapper,
-  @Autowired private val validator: Validator
+  @Autowired private val validator: Validator,
 ) {
 
   @Throws(JsonProcessingException::class)
@@ -24,7 +24,6 @@ class MessageParser<T>(
   private fun validate(messageType: T) {
     val errors = validator.validate<Any>(messageType)
     if (errors.isNotEmpty()) {
-
       throw ConstraintViolationException(errors)
     }
   }

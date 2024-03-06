@@ -24,7 +24,7 @@ data class Info(
 
   @field:NotNull
   @JsonIgnore
-  val dateOfHearing: LocalDate
+  val dateOfHearing: LocalDate,
 ) {
 
   override fun equals(other: Any?): Boolean {

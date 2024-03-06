@@ -75,7 +75,7 @@ data class Case(
   @field:Valid
   @JacksonXmlProperty(localName = "offences")
   @JacksonXmlElementWrapper
-  val offences: List<Offence> = ArrayList()
+  val offences: List<Offence> = ArrayList(),
 
 ) {
   @field:Valid

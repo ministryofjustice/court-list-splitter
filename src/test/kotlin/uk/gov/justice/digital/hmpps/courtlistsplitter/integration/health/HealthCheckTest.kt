@@ -2,9 +2,6 @@ package uk.gov.justice.digital.hmpps.courtlistsplitter.integration.health
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.whenever
-import org.springframework.boot.actuate.health.Health
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.courtlistsplitter.integration.IntegrationTestBase
 import java.time.LocalDateTime
@@ -14,17 +11,8 @@ import java.util.function.Consumer
 @ActiveProfiles("test")
 class HealthCheckTest : IntegrationTestBase() {
 
-  @MockBean
-  private lateinit var sqsCheck: SqsCheck
-
-  @MockBean
-  private lateinit var snsCheck: SnsCheck
-
   @Test
   fun `Health page reports ok`() {
-    whenever(sqsCheck.health()).thenReturn(Health.up().build())
-    whenever(snsCheck.health()).thenReturn(Health.up().build())
-
     webTestClient.get()
       .uri("/health")
       .exchange()
@@ -36,16 +24,13 @@ class HealthCheckTest : IntegrationTestBase() {
 
   @Test
   fun `Health info reports version`() {
-    whenever(sqsCheck.health()).thenReturn(Health.up().build())
-    whenever(snsCheck.health()).thenReturn(Health.up().build())
-
     webTestClient.get().uri("/health")
       .exchange()
       .expectStatus().isOk
       .expectBody().jsonPath("components.healthInfo.details.version").value(
         Consumer<String> {
           assertThat(it).startsWith(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE))
-        }
+        },
       )
   }
 

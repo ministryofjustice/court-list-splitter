@@ -11,7 +11,7 @@ data class Block(
   @field:NotNull
   @field:Valid
   @JacksonXmlProperty(localName = "sb_id")
-  val id: Long
+  val id: Long,
 ) {
 
   @field:NotNull

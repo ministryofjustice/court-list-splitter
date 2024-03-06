@@ -38,7 +38,6 @@ internal class OuCodeDeserializerTest {
   @Test
   @Throws(IOException::class)
   fun `when element populated then truncate the OU code`() {
-
     whenever(jsonParser.codec).thenReturn(objectCodec)
     whenever(objectCodec.readTree<TreeNode>(jsonParser)).thenReturn(jsonNode)
     whenever(jsonNode.asText("")).thenReturn("B01OB00")

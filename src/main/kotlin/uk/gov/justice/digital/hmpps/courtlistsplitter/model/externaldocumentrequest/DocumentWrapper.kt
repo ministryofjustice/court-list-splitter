@@ -9,5 +9,5 @@ data class DocumentWrapper(
   @field:Valid
   @field:NotNull
   @JacksonXmlProperty(localName = "document")
-  val document: MutableList<Document> = ArrayList()
+  val document: MutableList<Document> = ArrayList(),
 )

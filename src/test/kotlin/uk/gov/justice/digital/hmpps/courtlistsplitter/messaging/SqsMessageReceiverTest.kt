@@ -18,7 +18,7 @@ internal class SqsMessageReceiverTest {
 
   @Test
   fun `should track event when message received`() {
-    sqsMessageReceiver = SqsMessageReceiver("queue-name", messageProcessor, false)
+    sqsMessageReceiver = SqsMessageReceiver(messageProcessor, false)
 
     sqsMessageReceiver.receive("message-content", "messageId")
 
@@ -27,7 +27,7 @@ internal class SqsMessageReceiverTest {
 
   @Test
   fun `should throw exception when message received and force-error flag is true`() {
-    sqsMessageReceiver = SqsMessageReceiver("queue-name", messageProcessor, true)
+    sqsMessageReceiver = SqsMessageReceiver(messageProcessor, true)
 
     assertThrows<RuntimeException>("Simulating failure because features.send_all_messages_to_dlq flag is set") { sqsMessageReceiver.receive("message-content", "messageId") }
 

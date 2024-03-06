@@ -1,12 +1,10 @@
 package uk.gov.justice.digital.hmpps.courtlistsplitter.service
 
-import com.amazonaws.services.sns.AmazonSNS
 import com.amazonaws.services.sns.model.MessageAttributeValue
 import com.amazonaws.services.sns.model.PublishRequest
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.availability.AvailabilityChangeEvent.publish
 import org.springframework.stereotype.Component
 import uk.gov.justice.digital.hmpps.courtlistsplitter.model.externaldocumentrequest.Case
@@ -22,7 +20,7 @@ class MessageNotifier(
   @Autowired
   private val telemetryService: TelemetryService,
   @Autowired
-  private val hmppsQueueService: HmppsQueueService
+  private val hmppsQueueService: HmppsQueueService,
 
 ) {
 
@@ -36,7 +34,6 @@ class MessageNotifier(
     val messageValue = MessageAttributeValue()
       .withDataType("String")
       .withStringValue(MESSAGE_TYPE)
-
 
     val publishRequest = PublishRequest(topic.arn, message)
       .withMessageAttributes(mapOf("messageType" to messageValue))

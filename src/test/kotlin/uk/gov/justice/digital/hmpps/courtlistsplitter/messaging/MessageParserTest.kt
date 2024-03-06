@@ -100,7 +100,7 @@ class MessageParserTest {
         to = "CP_NPS",
         messageType = "externalDocument",
         timeStamp = "2020-05-29T09:16:40.594Z",
-        messageID = MessageID("6be22d98-a8f6-4b2a-b9e7-ca8735037c68", "relatesTo")
+        messageID = MessageID("6be22d98-a8f6-4b2a-b9e7-ca8735037c68", "relatesTo"),
       )
 
       assertThat(message.messageHeader).usingRecursiveComparison()
@@ -245,7 +245,7 @@ class MessageParserTest {
       .filter(
         Predicate<Document> { doc: Document ->
           doc.info.ouCode == ouCode
-        }
+        },
       )
       .findFirst().orElseThrow()
   }

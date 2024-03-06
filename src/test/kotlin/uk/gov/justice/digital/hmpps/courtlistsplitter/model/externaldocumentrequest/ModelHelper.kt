@@ -18,7 +18,7 @@ fun buildCase(caseNo: String?, dateOfHearing: LocalDate?, courtCode: String?): C
     "01",
     LocalTime.of(9, 30),
     LocalTime.of(12, 30),
-    courtCode ?: "B14LO"
+    courtCode ?: "B14LO",
   )
 
   val block = Block(1L)
@@ -40,7 +40,7 @@ fun buildCase(caseNo: String?, dateOfHearing: LocalDate?, courtCode: String?): C
     listNo = "1st",
     nationality1 = "British",
     nationality2 = "Polish",
-    offences = listOf(offence1, offence2)
+    offences = listOf(offence1, offence2),
   )
   case.block = block
 

@@ -10,5 +10,5 @@ data class MessageBodyType(
   @field:Valid
   @field:NotNull
   @JacksonXmlProperty(namespace = GW_MSG_SCHEMA, localName = "GatewayOperationType")
-  val gatewayOperationType: GatewayOperationType
+  val gatewayOperationType: GatewayOperationType,
 )

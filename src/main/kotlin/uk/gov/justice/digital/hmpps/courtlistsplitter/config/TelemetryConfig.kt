@@ -22,7 +22,7 @@ class TelemetryConfig {
   private class AppInsightKeyAbsentCondition : Condition {
     override fun matches(
       @NonNull context: ConditionContext,
-      @NonNull metadata: AnnotatedTypeMetadata
+      @NonNull metadata: AnnotatedTypeMetadata,
     ): Boolean {
       return StringUtils.isEmpty(context.environment.getProperty("application.insights.ikey"))
     }

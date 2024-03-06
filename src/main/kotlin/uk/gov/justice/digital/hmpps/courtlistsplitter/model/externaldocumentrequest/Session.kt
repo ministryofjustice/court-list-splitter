@@ -43,7 +43,7 @@ data class Session(
 
   @JsonDeserialize(using = OuCodeDeserializer::class)
   @JacksonXmlProperty(localName = "ou_code")
-  val ouCode: String?
+  val ouCode: String?,
 
 ) {
   constructor(dateOfHearing: LocalDate, start: LocalTime) : this(null, dateOfHearing, null, null, start, null, null)
