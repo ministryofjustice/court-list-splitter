@@ -63,3 +63,8 @@ generic-service:
   ....
 ```
 
+
+Running locally - sqs-read needs to be set in order for the app to consume messages
+```
+SPRING_PROFILES_ACTIVE=local,sqs-read ./gradlew clean bootRun 
+```

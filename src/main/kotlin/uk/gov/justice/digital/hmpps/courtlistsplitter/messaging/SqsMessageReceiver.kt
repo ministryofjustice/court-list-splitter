@@ -19,7 +19,7 @@ class SqsMessageReceiver(
   @JmsListener(destination = "crimeportalgatewayqueue", containerFactory = "hmppsQueueContainerFactoryProxy")
   fun receive(message: String) {
     if (sendAllMessagesToDlq) throw RuntimeException("Simulating failure because features.test.send_all_messages_to_dlq flag is set. Message will go to DLQ")
-    messageProcessor.process(message, "some-id")
+    messageProcessor.process(message, "some-id") // TODO supply messageID properly
   }
 
   companion object {
