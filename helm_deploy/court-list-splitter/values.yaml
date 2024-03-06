@@ -34,10 +34,11 @@ generic-service:
     court-list-splitter:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
     crime-portal-gateway-queue-credentials:
-      AWS_SQS_QUEUE_NAME: sqs_name
-      AWS_SQS_ENDPOINT_URL: sqs_id
+      HMPPS_SQS_QUEUES_CRIMEPORTALGATEWAYQUEUE_QUEUE_NAME: "sqs_name"
+    crime-portal-gateway-dead-letter-queue-credentials:
+      HMPPS_SQS_QUEUES_CRIMEPORTALGATEWAYQUEUE_DLQ_NAME: "sqs_name"
     court-case-events-topic:
-      AWS_SNS_TOPIC_ARN: topic_arn
+      HMPPS_SQS_TOPICS_COURTCASEEVENTSTOPIC_ARN: "topic_arn"
 
   allowlist:
     office: "217.33.148.210/32"
