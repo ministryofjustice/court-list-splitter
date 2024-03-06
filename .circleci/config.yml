@@ -51,8 +51,10 @@ jobs:
 
   test-integration:
     executor:
-      name: hmpps/java
-      tag: "19.0"
+      name: hmpps/localstack
+      jdk_tag: "19.0"
+      localstack_tag: "1.3.0"
+      services: "sqs,sns,s3"
     steps:
       - checkout
       - restore_cache:
