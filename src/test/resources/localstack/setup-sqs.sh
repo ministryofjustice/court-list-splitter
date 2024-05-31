@@ -10,12 +10,12 @@ export PAGER=
 aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name crime-portal-gateway-queue-dlq
 aws --endpoint-url http://localhost:4566 sqs create-queue --queue-name crime-portal-gateway-queue
 
-
-# The topic that the splitter writes to
-aws --endpoint-url http://localhost:4566 sqs create-queue --queue-name court-case-matcher-queue
+aws sqs get-queue-attributes --queue-url http://sqs.eu-west-2.localhost.localstack.cloud:4566/000000000000/crime-portal-gateway-queue --attribute-names All
 
 aws --endpoint-url=http://localhost:4566 sqs set-queue-attributes --queue-url "http://localhost:4566/000000000000/crime-portal-gateway-queue" --attributes '{"RedrivePolicy":"{\"maxReceiveCount\":\"2\", \"deadLetterTargetArn\":\"arn:aws:sqs:eu-west-2:000000000000:crime-portal-gateway-queue-dlq\"}", "VisibilityTimeout": "0" }'
 
+# The topic that the splitter writes to
+aws --endpoint-url http://localhost:4566 sqs create-queue --queue-name court-case-matcher-queue
 aws --endpoint-url=http://localhost:4566 sns create-topic --name court-case-events-topic
 aws --endpoint-url=http://localhost:4566 sns subscribe --topic-arn "arn:aws:sns:eu-west-2:000000000000:court-case-events-topic" --protocol "sqs" --notification-endpoint "http://localhost:4566/000000000000/court-case-matcher-queue"
 
