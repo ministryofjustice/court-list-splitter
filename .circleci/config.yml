@@ -72,6 +72,7 @@ jobs:
           environment:
             AWS_PROVIDER: localstack
             SPRING_PROFILES_ACTIVE: test
+            HOSTNAME_EXTERNAL: localhost
           command: ./gradlew integrationTest
       - save_cache:
           paths:

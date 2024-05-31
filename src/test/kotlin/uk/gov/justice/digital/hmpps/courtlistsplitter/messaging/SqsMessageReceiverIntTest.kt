@@ -67,7 +67,7 @@ class SqsMessageReceiverIntTest {
 
   @BeforeEach
   fun beforeEach() {
-    sqsClient.purgeQueue(PurgeQueueRequest("http://sqs.eu-west-2.localhost.localstack.cloud:4566/000000000000/crime-portal-gateway-queue"))
+    sqsClient.purgeQueue(PurgeQueueRequest("http://localhost:4566/000000000000/crime-portal-gateway-queue"))
     sqsMessageCounter.reset()
   }
 
