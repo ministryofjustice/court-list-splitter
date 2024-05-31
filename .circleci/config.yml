@@ -54,7 +54,7 @@ jobs:
       name: hmpps/localstack
       services: sqs,sns
       jdk_tag: "19.0"
-      localstack_tag: "1.0.1"
+      localstack_tag: "2.3.2"
     steps:
       - checkout
       - hmpps/install_aws_cli
