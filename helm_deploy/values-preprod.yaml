@@ -18,3 +18,7 @@ generic-service:
     minReplicas: 2
     maxReplicas: 4
     targetCPUUtilizationPercentage: 100
+
+  generic-prometheus-alerts:
+    targetApplication: court-list-splitter
+    alertSeverity: probation_in_court_alerts_preprod

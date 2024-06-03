@@ -54,7 +54,7 @@ jobs:
       name: hmpps/localstack
       services: sqs,sns
       jdk_tag: "19.0"
-      localstack_tag: "0.11.2"
+      localstack_tag: "latest"
     steps:
       - checkout
       - hmpps/install_aws_cli
@@ -72,6 +72,7 @@ jobs:
           environment:
             AWS_PROVIDER: localstack
             SPRING_PROFILES_ACTIVE: test
+            HOSTNAME_EXTERNAL: localhost
           command: ./gradlew integrationTest
       - save_cache:
           paths:
