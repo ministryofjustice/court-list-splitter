@@ -15,6 +15,6 @@ aws --endpoint-url=http://localhost:4566 sqs set-queue-attributes --queue-url "h
 # The topic that the splitter writes to
 aws --endpoint-url http://localhost:4566 sqs create-queue --queue-name court-case-matcher-queue
 aws --endpoint-url=http://localhost:4566 sns create-topic --name court-case-events-topic
-aws --endpoint-url=http://localhost:4566 sns subscribe --topic-arn "arn:aws:sns:eu-west-2:000000000000:court-case-events-topic" --protocol "sqs" --notification-endpoint "arn:aws:sns:eu-west-2:000000000000:court-case-matcher-queue"
+aws --endpoint-url=http://localhost:4566 sns subscribe --topic-arn "arn:aws:sns:eu-west-2:000000000000:court-case-events-topic" --protocol "sqs" --notification-endpoint "arn:aws:sqs:eu-west-2:000000000000:court-case-matcher-queue"
 
 echo "SNS and SQS Configured"
