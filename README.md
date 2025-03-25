@@ -1,3 +1,7 @@
+# Important
+
+This service has been decommissioned.
+
 # Court List Splitter
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/court-list-splitter.svg?style=svg)](https://circleci.com/gh/ministryofjustice/court-list-splitter)
